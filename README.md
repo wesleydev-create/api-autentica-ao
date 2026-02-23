@@ -1,56 +1,148 @@
-🛠 API de Login com Node.js (Projeto de Estudo)
+# AuthAPI
 
-Esta é uma API simples de autenticação desenvolvida com Node.js e Express, criada com foco em aprendizado de backend e fundamentos de autenticação.
+API de autenticação com Node.js, Express e JWT, pronta para uso em projetos e aprendizado.
 
-O projeto implementa:
+---
 
-✅ Registro de usuários
+## 🚀 Tecnologias
 
-✅ Login com verificação de senha criptografada (bcrypt)
+- Node.js
+- Express
+- JSON Web Tokens (JWT)
+- Bcrypt (hash de senhas)
+- Helmet (segurança de headers)
+- CORS
+- Morgan (logs)
+- Dotenv (variáveis de ambiente)
 
-✅ Geração de token JWT
+---
 
-✅ Middleware para proteção de rotas
+## 📂 Estrutura do projeto
 
-✅ Uso de variáveis de ambiente com dotenv
 
-Atualmente, o projeto utiliza um "banco de dados" em memória (array), portanto os dados são perdidos ao reiniciar o servidor. A proposta é entender primeiro a lógica de autenticação antes de integrar com um banco real como MongoDB ou PostgreSQL.
+AuthAPI/
+├── src/
+│ ├── routes/
+│ │ └── auth.routes.js
+│ ├── controllers/
+│ │ └── auth.controller.js
+│ ├── services/
+│ │ └── auth.service.js
+│ ├── middlewares/
+│ │ └── auth.middleware.js
+├── app.js
+├── package.json
+├── package-lock.json
+└── .env
 
-🎯 Objetivo
 
-Este projeto foi desenvolvido para praticar:
+---
 
-Estruturação básica de uma API REST
+## ⚙️ Instalação
 
-Conceitos de autenticação com JWT
+1. Clone o repositório:
 
-Criptografia de senhas
+```bash
+git clone https://github.com/wesleydev-create/AuthAPI.git
+cd AuthAPI
 
-Organização de rotas e middlewares
+Instale as dependências:
 
-Integração futura com frontend (Next.js)
+npm install
 
-🚧 Status do Projeto
+Crie um arquivo .env na raiz:
 
-Projeto em evolução.
-Próximos passos planejados:
+SECRET=sua_chave_super_secreta
+PORT=8080
 
-Integração com banco de dados
+Inicie o servidor em modo desenvolvimento:
 
-Organização em arquitetura MVC
+npm run dev
 
-Implementação de refresh token
+Servidor rodando em http://localhost:8080
 
-Deploy em ambiente de produção
+🔥 Rotas da API
+1️⃣ Registro de usuário
+POST /api/v1/auth/register
 
-A SIMPLE JWT AUTH API É UMA API DE AUTENTICAÇÃO DESENVOLVIDA COM NODE.JS E EXPRESS, CRIADA COM FOCO EM APRENDIZADO PRÁTICO DE BACKEND.
+Body (JSON):
 
-ESTE PROJETO TEM COMO OBJETIVO ENTENDER, NA PRÁTICA, COMO FUNCIONA UM SISTEMA REAL DE LOGIN UTILIZANDO:
+{
+  "email": "teste@email.com",
+  "password": "123456"
+}
 
-🔑 TOKEN JWT
+Resposta:
 
-🔒 CRIPTOGRAFIA DE SENHAS COM BCRYPT
+{
+  "success": true,
+  "message": "Usuário criado com sucesso",
+  "data": {
+    "id": 1,
+    "email": "teste@email.com"
+  }
+}
+2️⃣ Login
+POST /api/v1/auth/login
 
-🛡 PROTEÇÃO DE ROTAS COM MIDDLEWARE
+Body (JSON):
 
-⚙ VARIÁVEIS DE AMBIENTE (.ENV)
+{
+  "email": "teste@email.com",
+  "password": "123456"
+}
+
+Resposta:
+
+{
+  "success": true,
+  "token": "SEU_JWT_TOKEN"
+}
+3️⃣ Perfil do usuário (protegido)
+GET /api/v1/auth/me
+
+Headers:
+
+Authorization: Bearer SEU_JWT_TOKEN
+
+Resposta:
+
+{
+  "success": true,
+  "user": {
+    "id": 1,
+    "email": "teste@email.com",
+    "iat": 123456789,
+    "exp": 123456789
+  }
+}
+🛠️ Funcionalidades
+
+Registro de usuário com senha hash
+
+Login com JWT
+
+Middleware de autenticação
+
+Estrutura organizada por rotas, controllers, services e middlewares
+
+Segurança básica com Helmet e CORS
+
+Logs de requisições com Morgan
+
+Versionamento da API (/api/v1/)
+
+💡 Próximos passos para produção
+
+Trocar let users = [] por banco de dados (MongoDB ou PostgreSQL)
+
+Adicionar refresh tokens
+
+Criar testes automatizados
+
+Deploy em Render, Railway ou AWS
+
+📌 Autor
+
+Wesley Rafael Dias Gomes
+GitHub
